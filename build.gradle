@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+}
+
+group 'dart.handler'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "dart.handler.Main"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    exclude 'META-INF/*.RSA'
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.jsoup:jsoup:1.13.1'
+    compile 'org.ini4j:ini4j:0.5.4'
+    compile 'org.apache.commons:commons-email:1.5'
+    compile 'commons-io:commons-io:2.8.0'
+    compile 'org.apache.commons:commons-lang3:3.11'
+    compile 'org.apache.tika:tika-parsers:1.24.1'
+    compile 'org.apache.pdfbox:pdfbox:2.0.21'
+    compile 'org.apache.pdfbox:jbig2-imageio:3.0.3'
+    compile 'com.github.jai-imageio:jai-imageio-core:1.4.0'
+    compile 'com.github.jai-imageio:jai-imageio-jpeg2000:1.3.0'
+}
